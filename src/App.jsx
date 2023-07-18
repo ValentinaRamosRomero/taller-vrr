@@ -1,20 +1,28 @@
-import Inicio from "./components/Inicio";
-import Login from "./components/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from 'react';
+import List from './components/List';
+import Detail from './components/Detail';
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
-  const [autenticado, setAutenticado] = useState(false);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login setAutenticado={setAutenticado} />} />
+        <Route path="/" element={<Login />} />
         <Route
-          path="/inicio"
+          path="/listado"
           element={
-            <ProtectedRoute autenticado={autenticado}>
-              <Inicio />
+            <ProtectedRoute>
+              <List />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/detalle/:id"
+          element={
+            <ProtectedRoute>
+              <Detail />
             </ProtectedRoute>
           }
         />
@@ -24,3 +32,4 @@ const App = () => {
 };
 
 export default App;
+
